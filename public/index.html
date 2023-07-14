@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Folder and File Icons</title>
+  <style>
+    .icon {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="content"></div>
+
+  <script>
+    // Sample JSON data
+    const jsonData = {
+      "files": [
+        {
+          "name": "app.html",
+          "type": "html",
+          "icon": "html-icon"
+        },
+        {
+          "name": "index.html",
+          "type": "file",
+          "icon": "html-icon"
+        }
+      ],
+      "folders": [
+        {
+          "name": "folder1",
+          "type": "folder",
+          "icon": "folder-icon"
+        },
+        {
+          "name": "folder2",
+          "type": "folder",
+          "icon": "folder-icon"
+        }
+      ]
+    };
+
+    // Function to generate HTML for folder or file item
+    function generateItemHTML(item) {
+      const iconClass = `icon ${item.icon}`;
+      const itemHTML = `<div class="item">
+                          <img class="${iconClass}" src="icons/${item.icon}.png" alt="${item.type} icon" />
+                          <span>${item.name}</span>
+                        </div>`;
+      return itemHTML;
+    }
+
+    // Function to generate HTML for folders and files
+    function generateContentHTML(data) {
+      let contentHTML = '';
+
+      data.folders.forEach(folder => {
+        contentHTML += generateItemHTML(folder);
+      });
+
+      data.files.forEach(file => {
+        contentHTML += generateItemHTML(file);
+      });
+
+      return contentHTML;
+    }
+
+    // Get the content container element
+    const contentContainer = document.getElementById('content');
+
+    // Generate and insert the HTML content
+    contentContainer.innerHTML = generateContentHTML(jsonData);
+  </script>
+</body>
+</html>
